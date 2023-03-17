@@ -1,7 +1,14 @@
-import '../styles/globals.css'
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+
+const stripePromise = loadStripe(process.env.STRIPE_PUBLIC_KEY);
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <Elements stripe={stripePromise}>
+      <Component {...pageProps} />
+    </Elements>
+  );
 }
 
-export default MyApp
+export default MyApp;
